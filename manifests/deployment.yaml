@@ -1,0 +1,26 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  creationTimestamp: null
+  labels:
+    app: pokedex-app
+  name: pokedex-app
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: pokedex-app
+  strategy: {}
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: pokedex-app
+    spec:
+      containers:
+      - image: crakstpokemon001f54wpt27kn6se.azurecr.io/pokedex-front-end
+        name: pokedex-app
+        ports:
+        - containerPort: 3000
+        resources: {}
+status: {}
