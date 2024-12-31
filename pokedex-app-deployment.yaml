@@ -19,28 +19,6 @@ spec:
         image: ghcr.io/rolfschutten/pokedex-aks/pokedex-app:latest
         ports:
         - containerPort: 3000
-        readinessProbe:
-          httpGet:
-            path: /
-            port: 3000
-          initialDelaySeconds: 5
-          periodSeconds: 10
-        livenessProbe:
-          httpGet:
-            path: /
-            port: 3000
-          initialDelaySeconds: 15
-          periodSeconds: 20
-      affinity:
-        podAntiAffinity:
-          requiredDuringSchedulingIgnoredDuringExecution:
-          - labelSelector:
-              matchExpressions:
-              - key: app
-                operator: In
-                values:
-                - pokedex-app
-            topologyKey: kubernetes.io/hostname
 ---
 apiVersion: v1
 kind: Service
@@ -52,6 +30,6 @@ spec:
   type: LoadBalancer
   ports:
   - port: 80
-    targetPort: 3000  
+    targetPort: 3000
   selector:
     app: pokedex-app
